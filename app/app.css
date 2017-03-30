@@ -1,25 +1,30 @@
 /* app css stylesheet */
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+body {
+  padding-top: 50px;
 }
 
-.menu:before {
-  content: "[";
+.main-container {
+  padding: 40px 15px;
 }
 
-.menu:after {
-  content: "]";
+.navbar-inverse {
+    background-color: #3a4e70;
+    border-color: #253147;
 }
 
-.menu > li {
-  display: inline;
+.navbar-inverse .navbar-brand {
+    color: white;
 }
 
-.menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+.panel-body { padding-top:0px; }
+
+.job-name { 
+	border-bottom: 1px solid #ddd;
+	padding: 15px;
+}
+
+button.add-job {
+	background-color: #3a4e70;
+	border-color: #253147;
 }
