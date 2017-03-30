@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-repeat="job in jobs">
   	  <div class="panel-body">
   	    <div class="row job-name">
           <div class="input-group">
@@ -13,7 +13,7 @@
             <div class="dyno_size">
               <h6>Dyno size</h6>
 
-                <span class="not-on-edit">Free</span>
+                <span class="not-on-edit">{{job.dyno}}</span>
 
               <select style="display: none;" name="dyno_size" class="on-edit select-block"><option value="11" selected="" data-default="true">Free</option></select>
             </div>
@@ -21,7 +21,7 @@
           <div class="col-md-3 col-sm-3 col-xs-6">
             <div class="frequency">
               <h6>Frequency</h6>
-                <span class="not-on-edit">Daily</span>
+                <span class="not-on-edit">{{job.frequency}}</span>
 
               <select style="display: none;" name="every" class="interval on-edit select-block"><option value="1440" selected="selected" data-default="true">Daily</option><option value="60">Hourly</option><option value="10">Every 10 minutes</option></select>
             </div>
@@ -29,13 +29,13 @@
           <div class="col-md-3 col-sm-3 col-xs-6">
             <div class="last-run">
               <h6>Last run</h6>
-              <span class="timestamp">Mar 30 16:30 UTC</span>
+              <span class="timestamp">{{job.last}}</span>
             </div>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-6">
             <div class="last-run">
-              <h6>Last run</h6>
-              <span class="timestamp">Mar 30 16:30 UTC</span>
+              <h6>Next run</h6>
+              <span class="timestamp">{{job.next}}</span>
             </div>
           </div>
         </div>
@@ -49,6 +49,6 @@
 </div>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <button class="btn btn-primary add-job" type="Add" style="width:100%;">Add New Job</button> 
+    <button ng-click="addJob()" class="btn btn-primary add-job" type="Add" style="width:100%;">Add New Job</button> 
   </div>
 </div>
