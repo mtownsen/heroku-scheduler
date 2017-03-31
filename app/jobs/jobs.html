@@ -5,50 +5,88 @@
   	    <div class="row job-name">
           <div class="input-group">
             <span class="input-group-addon">$</span>
-            <input type="text" class="form-control" value="rake routes" disabled>
+            <input type="text" class="form-control" ng-value="job.command" ng-disabled="!showEditFields">
           </div>
         </div>
         <div class="row">
           <div class="col-md-3 col-sm-3 col-xs-6">
             <div class="dyno_size">
               <h6>Dyno size</h6>
-
-                <span class="not-on-edit">{{job.dyno}}</span>
-
-              <select style="display: none;" name="dyno_size" class="on-edit select-block"><option value="11" selected="" data-default="true">Free</option></select>
+              <span ng-hide="showEditFields">{{job.dyno}}</span>
+              <select ng-show="showEditFields" ng-model="job.dyno">
+                <option ng-repeat="dyno in dynos" ng-value="dyno.value">{{dyno.name}}</option>
+              </select>
             </div>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-6">
             <div class="frequency">
               <h6>Frequency</h6>
-                <span class="not-on-edit">{{job.frequency}}</span>
-
-              <select style="display: none;" name="every" class="interval on-edit select-block"><option value="1440" selected="selected" data-default="true">Daily</option><option value="60">Hourly</option><option value="10">Every 10 minutes</option></select>
+              <span ng-hide="showEditFields">{{job.frequency}}</span>
+              <select ng-show="showEditFields" ng-model="job.frequency">
+                <option ng-repeat="frequency in frequencys" ng-value="frequency.value">{{frequency.name}}</option>
+              </select>
             </div>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-6">
-            <div class="last-run">
+            <div>
               <h6>Last run</h6>
-              <span class="timestamp">{{job.last}}</span>
+              <span class="job-label timestamp">{{job.last | date:'MMM d h:mm a'}}</span>
             </div>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-6">
-            <div class="last-run">
+            <div>
               <h6>Next run</h6>
-              <span class="timestamp">{{job.next}}</span>
+              <span class="job-label timestamp">{{job.next | date:'MMM d h:mm a'}}</span>
             </div>
           </div>
         </div>
   	  </div>
   	  <div class="panel-footer">
-        <button class="btn btn-default" type="edit">Edit</button> 
-        <button type="button" class="btn btn-link">Remove</button>
+        <button class="btn btn-default" type="edit" ng-show="showEditFields" ng-click="showEditFields = ! showEditFields; saveJob(job)">Save</button> 
+        <button class="btn btn-default" type="edit" ng-hide="showEditFields" ng-click="showEditFields = ! showEditFields">Edit</button> 
+        <button type="button" class="btn btn-link" ng-click="removeJob(job)">Remove</button>
       </div>
   	</div>
   </div>
 </div>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <button ng-click="addJob()" class="btn btn-primary add-job" type="Add" style="width:100%;">Add New Job</button> 
+    <button ng-click="showNewForm = ! showNewForm" class="btn btn-primary add-job" type="Add" style="width:100%;">Add New Job</button> 
+  </div>
+</div>
+<br />
+<div class="row" ng-show="showNewForm">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row job-name">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="text" class="form-control" ng-value="newJob.command">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="dyno_size">
+              <h6>Dyno size</h6>
+              <select ng-model="newJob.dyno">
+                <option ng-repeat="dyno in dynos">{{dyno.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-6">
+            <div>
+              <h6>Frequency</h6>
+              <select ng-model="newJob.frequency">
+                <option ng-repeat="frequency in frequencys">{{frequency.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <button class="btn btn-default" type="edit" ng-click="addJob(newJob)">Save</button> 
+      </div>
+    </div>
   </div>
 </div>
