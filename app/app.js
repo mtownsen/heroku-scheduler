@@ -5,8 +5,8 @@ angular.module('myApp', [
   'ngRoute',
   'ui.bootstrap',
   'myApp.jobs'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+])
+.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
   $routeProvider.otherwise({redirectTo: '/jobs'});
