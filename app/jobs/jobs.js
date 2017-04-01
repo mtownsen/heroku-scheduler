@@ -9,7 +9,7 @@ angular.module('myApp.jobs', ['ngRoute'])
   });
 }])
 
-.controller('JobsCtrl', ['$scope', 'JobFactory', function($scope, JobFactory) {
+.controller('JobsCtrl', ['$scope', '$location', '$anchorScroll', 'JobFactory', function($scope, $location, $anchorScroll, JobFactory) {
 
 	$scope.showCreateForm = false;
 
@@ -18,10 +18,22 @@ angular.module('myApp.jobs', ['ngRoute'])
 	 		$scope.jobs = data;
  	});
 
+	$scope.$watch('showNewForm', function() {
+		if($scope.showNewForm)
+		{
+			//Wait for dom to render
+			setTimeout(function(){
+				//scroll down to bring the new job form onto the screen
+				$location.hash('newJobForm');
+				$anchorScroll();    
+			}, 100);	
+		}
+	});
+
 	$scope.submitForm = function(isValid) {
 		if (isValid) {
 			$scope.showNewForm = false;
-			
+
 			//Grab a copy of the job so we can reuse the form variable.
 			var newJob = angular.copy($scope.newJob)
 			var createdJob = JobFactory.addJob(newJob);
