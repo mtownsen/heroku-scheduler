@@ -71,7 +71,7 @@
             <div class="col-md-3 col-sm-3 col-xs-6">
               <div class="dyno_size">
                 <h6>Dyno size</h6>
-                <select ng-model="newJob.dyno" ng-required="true" required>
+                <select ng-model="newJob.dyno" ng-required="true" ng-focus="true" required>
                   <option ng-repeat="dyno in dynos">{{dyno.name}}</option>
                 </select>
                 <p ng-show="newJobForm.newJob.dyno.$invalid && !newJobForm.newJob.dyno.$pristine" class="help-block">Please choose a dyno.</p>
